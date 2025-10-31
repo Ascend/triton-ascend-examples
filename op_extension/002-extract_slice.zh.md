@@ -21,7 +21,7 @@ def extract_slice(ful, offsets, sizes, strides, _builder=None, _generator=None) 
 ```
 
 ## 差异点概述
-1. Moe Token反重排，读取一个连续的数据块，根据indece，将Token提取出来后放置到指定的位置，该场景下，数据读取连续，写出是分散的   
+1. Moe Token反重排，读取一个连续的数据块，根据indices，将Token提取出来后放置到指定的位置，该场景下，数据读取连续，写出是分散的   
 GPU实现：每个kernel处理一个Token，利用多核优势能够达成很好的性能   
 NPU实现：NPU核数少，需要增加单Kernel处理数据量，才能达到性能最佳，针对Moe反重排，读取数据连续，每段写出到不同的位置，提供extract_slice接口，支持从一个大的Tensor中，读取部分数据，然后对该数据操作，达成批量读取，分散操作的目的   
 
