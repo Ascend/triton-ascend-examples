@@ -23,7 +23,7 @@ def insert_slice(ful, sub, offsets, sizes, strides, _builder=None, _generator=No
 ```
 
 ## 差异点概述
-1. Moe Token重排，从indece指定的位置读取数据，顺序存放，该场景下，数据随机读取，写出的位置是顺序连续的   
+1. Moe Token重排，从indices指定的位置读取数据，顺序存放，该场景下，数据随机读取，写出的位置是顺序连续的   
 GPU实现：每个kernel处理一个Token，利用多核优势能够达成很好的性能   
 NPU实现：NPU核数少，需要增加单Kernel处理数据量，才能达到性能最佳，针对Moe重排，写出数据连续存放，该场景可以使用insert_slice接口，将多个从不同位置读取的Tensor数据合并后一次写出，提升性能   
 
